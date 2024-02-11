@@ -16,7 +16,7 @@ var (
 
 func init() {
 	if err := godotenv.Load(); err != nil {
-		log.Fatalf("error loading .env file: %v", err)
+		log.Println("no .env file found")
 	}
 	address = getEnv("ADDRESS", ":8081")
 	target = getEnv("TARGET", ":8080")
