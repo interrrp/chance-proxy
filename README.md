@@ -45,3 +45,7 @@ Fail 90% of the time:
 ```sh
 chance-proxy -chance 90
 ```
+
+## License
+
+chance-proxy is licensed under the [GNU General Public License 3.0](./LICENSE) license.
