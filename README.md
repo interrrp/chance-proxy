@@ -21,16 +21,9 @@ The executable will now be in the `chance-proxy` directory. Good job! 😀👍
 
 ## Configuration
 
-All configuration happens through passing command-line arguments:
+All configuration happens through environment variables or `.env`.
 
-```text
--address string
-    Address to listen on (default "localhost:8081")
--chance int
-    Chance of failure (default 20)
--target string
-    Target address (default "localhost:8080")
-```
+Copy `example.env` into `.env` and change its contents as needed.
 
 ### Examples
 

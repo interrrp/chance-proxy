@@ -1,6 +1,12 @@
 package main
 
-import "flag"
+import (
+	"log"
+	"os"
+	"strconv"
+
+	"github.com/joho/godotenv"
+)
 
 var (
 	address string
@@ -9,8 +15,26 @@ var (
 )
 
 func init() {
-	flag.StringVar(&address, "address", "localhost:8081", "Address to listen on")
-	flag.StringVar(&target, "target", "localhost:8080", "Target address")
-	flag.IntVar(&chance, "chance", 20, "Chance of failure")
-	flag.Parse()
+	if err := godotenv.Load(); err != nil {
+		log.Fatalf("error loading .env file: %v", err)
+	}
+	address = getEnv("ADDRESS", ":8081")
+	target = getEnv("TARGET", ":8080")
+	chance = getIntEnv("CHANCE", 20)
+}
+
+func getEnv(key, fallback string) string {
+	value := os.Getenv(key)
+	if value == "" {
+		return fallback
+	}
+	return value
+}
+
+func getIntEnv(key string, fallback int) int {
+	i, err := strconv.Atoi(getEnv(key, strconv.Itoa(fallback)))
+	if err != nil {
+		return fallback
+	}
+	return i
 }
