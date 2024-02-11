@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"os"
 	"strconv"
 
@@ -15,9 +14,7 @@ var (
 )
 
 func init() {
-	if err := godotenv.Load(); err != nil {
-		log.Println("no .env file found")
-	}
+	godotenv.Load()
 	address = getEnv("ADDRESS", ":8081")
 	target = getEnv("TARGET", ":8080")
 	chance = getIntEnv("CHANCE", 20)
