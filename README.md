@@ -19,6 +19,20 @@ go build -ldflags "-s -w" -o chance-proxy .
 
 The executable will now be in the `chance-proxy` directory. Good job! 😀👍
 
+## Docker
+
+The Docker image is available at `interrrp/chance-proxy`. Try it out:
+
+```sh
+docker run -it -p 8080:8080 -p 8081:8081 chance-proxy
+```
+
+You may also choose to build it manually:
+
+```sh
+docker build . -t interrrp/chance-proxy
+```
+
 ## Configuration
 
 All configuration happens through environment variables or `.env`.
