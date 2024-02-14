@@ -17,13 +17,13 @@ func handleClient(client net.Conn) {
 
 	log.Printf("proxying %s", client.RemoteAddr())
 
-	svr, err := net.Dial("tcp", target)
+	target, err := net.Dial("tcp", target)
 	if err != nil {
 		log.Printf("error dialing server: %v", err)
 		return
 	}
-	defer svr.Close()
+	defer target.Close()
 
-	go io.Copy(svr, client)
-	io.Copy(client, svr)
+	go io.Copy(target, client)
+	io.Copy(client, target)
 }

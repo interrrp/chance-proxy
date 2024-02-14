@@ -6,18 +6,18 @@ import (
 )
 
 func main() {
-	s, err := net.Listen("tcp", address)
+	server, err := net.Listen("tcp", address)
 	if err != nil {
 		log.Fatalf("error starting server: %v", err)
 	}
-	defer s.Close()
+	defer server.Close()
 
 	log.Printf("listening on %s", address)
 	log.Printf("proxying to %s", target)
 	log.Printf("chance of failure: %d%%", chance)
 
 	for {
-		client, err := s.Accept()
+		client, err := server.Accept()
 		if err != nil {
 			log.Printf("error accepting connection: %v", err)
 			continue
