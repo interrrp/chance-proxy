@@ -2,7 +2,7 @@ package main
 
 import (
 	"io"
-	"log"
+	"log/slog"
 	"math/rand"
 	"net"
 )
@@ -11,15 +11,15 @@ func handleClient(client net.Conn) {
 	defer client.Close()
 
 	if rand.Intn(100) < chance {
-		log.Printf("disconnecting %s", client.RemoteAddr())
+		slog.Info("disconnecting", "ip", client.RemoteAddr())
 		return
 	}
 
-	log.Printf("proxying %s", client.RemoteAddr())
+	slog.Info("proxying", "ip", client.RemoteAddr())
 
 	target, err := net.Dial("tcp", target)
 	if err != nil {
-		log.Printf("error dialing server: %v", err)
+		slog.Error("failed to dial server", "err", err)
 		return
 	}
 	defer target.Close()

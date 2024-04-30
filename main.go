@@ -1,25 +1,31 @@
 package main
 
 import (
-	"log"
+	"log/slog"
 	"net"
+	"os"
+
+	"github.com/lmittmann/tint"
 )
 
 func main() {
+	slog.SetDefault(slog.New(
+		tint.NewHandler(os.Stderr, &tint.Options{}),
+	))
+
 	server, err := net.Listen("tcp", address)
 	if err != nil {
-		log.Fatalf("error starting server: %v", err)
+		slog.Error("failed to start server", "err", err)
+		os.Exit(1)
 	}
 	defer server.Close()
 
-	log.Printf("listening on %s", address)
-	log.Printf("proxying to %s", target)
-	log.Printf("chance of failure: %d%%", chance)
+	slog.Info("starting", "address", address, "target", target, "failureChance", chance)
 
 	for {
 		client, err := server.Accept()
 		if err != nil {
-			log.Printf("error accepting connection: %v", err)
+			slog.Error("failed to accept connection", "err", err)
 			continue
 		}
 		go handleClient(client)
