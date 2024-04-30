@@ -15,9 +15,9 @@ var (
 
 func init() {
 	godotenv.Load()
-	address = getEnv("ADDRESS", ":8081")
-	target = getEnv("TARGET", ":8080")
-	chance = getIntEnv("CHANCE", 20)
+	address = getEnv("CPXY_ADDRESS", ":8081")
+	target = getEnv("CPXY_TARGET", ":8080")
+	chance = getIntEnv("CPXY_CHANCE", 20)
 }
 
 func getEnv(key, fallback string) string {
