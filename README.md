@@ -50,7 +50,7 @@ chance-proxy -address localhost:25566 -target localhost:25565
 Fail 90% of the time:
 
 ```sh
-chance-proxy -chance 90
+chance-proxy -failureChance 90
 ```
 
 ## License

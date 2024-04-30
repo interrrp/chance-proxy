@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"os"
 	"strconv"
 
@@ -8,16 +9,21 @@ import (
 )
 
 var (
-	address string
-	target  string
-	chance  int
+	address       string
+	target        string
+	failureChance int
 )
 
 func init() {
+	flag.StringVar(&address, "address", ":8081", "address to listen on")
+	flag.StringVar(&target, "target", ":8080", "address to proxy to")
+	flag.IntVar(&failureChance, "failure-chance", 20, "percent chance of failure")
+	flag.Parse()
+
 	godotenv.Load()
-	address = getEnv("CPXY_ADDRESS", ":8081")
-	target = getEnv("CPXY_TARGET", ":8080")
-	chance = getIntEnv("CPXY_CHANCE", 20)
+	address = getEnv("CPXY_ADDRESS", address)
+	target = getEnv("CPXY_TARGET", target)
+	failureChance = getIntEnv("CPXY_FAILURE_CHANCE", failureChance)
 }
 
 func getEnv(key, fallback string) string {

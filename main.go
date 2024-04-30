@@ -20,7 +20,7 @@ func main() {
 	}
 	defer server.Close()
 
-	slog.Info("starting", "address", address, "target", target, "failureChance", chance)
+	slog.Info("starting", "address", address, "target", target, "failureChance", failureChance)
 
 	for {
 		client, err := server.Accept()

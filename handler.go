@@ -10,7 +10,7 @@ import (
 func handleClient(client net.Conn) {
 	defer client.Close()
 
-	if rand.Intn(100) < chance {
+	if rand.Intn(100) < failureChance {
 		slog.Info("disconnecting", "ip", client.RemoteAddr())
 		return
 	}
