@@ -15,15 +15,15 @@ var (
 )
 
 func init() {
-	flag.StringVar(&address, "address", ":8081", "address to listen on")
-	flag.StringVar(&target, "target", ":8080", "address to proxy to")
-	flag.IntVar(&failureChance, "failure-chance", 20, "percent chance of failure")
-	flag.Parse()
-
 	godotenv.Load()
-	address = getEnv("CPXY_ADDRESS", address)
-	target = getEnv("CPXY_TARGET", target)
-	failureChance = getIntEnv("CPXY_FAILURE_CHANCE", failureChance)
+	address = getEnv("CPXY_ADDRESS", ":8081")
+	target = getEnv("CPXY_TARGET", ":8080")
+	failureChance = getIntEnv("CPXY_FAILURE_CHANCE", 20)
+
+	flag.StringVar(&address, "address", address, "address to listen on")
+	flag.StringVar(&target, "target", target, "address to proxy to")
+	flag.IntVar(&failureChance, "failure-chance", failureChance, "percent chance of failure")
+	flag.Parse()
 }
 
 func getEnv(key, fallback string) string {
