@@ -7,14 +7,14 @@
 To build chance-proxy, you will need:
 
 - [Git](https://git-scm.com)
-- [Go](https://go.dev) 1.22 or later
+- [Go](https://go.dev) 1.24 or later
 
 After ensuring you have installed all of the prerequisites, run the following commands to build chance-proxy:
 
 ```sh
 git clone https://github.com/interrrp/chance-proxy
 cd chance-proxy
-go build -ldflags "-s -w" -o chance-proxy .
+go build -o chance-proxy .
 ```
 
 The executable will now be in the `chance-proxy` directory. Good job! 😀👍
